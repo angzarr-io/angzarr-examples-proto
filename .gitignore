@@ -1,0 +1,12 @@
+# Buf lock file (regenerated on buf mod update)
+buf.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
