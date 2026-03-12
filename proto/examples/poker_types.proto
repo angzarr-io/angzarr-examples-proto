@@ -1,9 +1,10 @@
 syntax = "proto3";
 package examples;
-option go_package = "github.com/angzarr/angzarr/proto/examples";
-option java_package = "dev.angzarr.examples";
-option java_multiple_files = true;
+
 option csharp_namespace = "Angzarr.Examples";
+option go_package = "github.com/angzarr/angzarr/proto/examples";
+option java_multiple_files = true;
+option java_package = "dev.angzarr.examples";
 option ruby_package = "Angzarr::Examples";
 
 // =============================================================================
@@ -44,8 +45,8 @@ enum Rank {
 // Hand ranking result
 message HandRanking {
   HandRankType rank_type = 1;
-  repeated Rank kickers = 2;  // For tie-breaking
-  int32 score = 3;            // Numeric score for comparison
+  repeated Rank kickers = 2; // For tie-breaking
+  int32 score = 3; // Numeric score for comparison
 }
 
 enum HandRankType {
@@ -78,7 +79,7 @@ enum BettingPhase {
   FLOP = 2;
   TURN = 3;
   RIVER = 4;
-  DRAW = 5;        // For draw games
+  DRAW = 5; // For draw games
   SHOWDOWN = 6;
 }
 
@@ -103,21 +104,21 @@ enum PlayerType {
 // Currency amount (in smallest unit, e.g., cents)
 message Currency {
   int64 amount = 1;
-  string currency_code = 2;  // "USD", "EUR", "CHIPS"
+  string currency_code = 2; // "USD", "EUR", "CHIPS"
 }
 
 // Position at table
 message Seat {
-  int32 position = 1;        // 0-9 for 10-max table
-  bytes player_root = 2;     // Player aggregate root
-  Currency stack = 3;        // Current stack at table
-  bool is_active = 4;        // Still in current hand
-  bool is_sitting_out = 5;   // Temporarily away
+  int32 position = 1; // 0-9 for 10-max table
+  bytes player_root = 2; // Player aggregate root
+  Currency stack = 3; // Current stack at table
+  bool is_active = 4; // Still in current hand
+  bool is_sitting_out = 5; // Temporarily away
 }
 
 // Pot structure (for side pots)
 message Pot {
   int64 amount = 1;
-  repeated bytes eligible_players = 2;  // Player roots eligible for this pot
-  string pot_type = 3;                  // "main" or "side_N"
+  repeated bytes eligible_players = 2; // Player roots eligible for this pot
+  string pot_type = 3; // "main" or "side_N"
 }

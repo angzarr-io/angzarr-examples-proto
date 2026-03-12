@@ -1,13 +1,14 @@
 syntax = "proto3";
 package examples;
-option go_package = "github.com/angzarr/angzarr/proto/examples";
-option java_package = "dev.angzarr.examples";
-option java_multiple_files = true;
-option csharp_namespace = "Angzarr.Examples";
-option ruby_package = "Angzarr::Examples";
 
-import "google/protobuf/timestamp.proto";
 import "examples/poker_types.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Angzarr.Examples";
+option go_package = "github.com/angzarr/angzarr/proto/examples";
+option java_multiple_files = true;
+option java_package = "dev.angzarr.examples";
+option ruby_package = "Angzarr::Examples";
 
 // =============================================================================
 // Table Domain - Game session, seating, and configuration
@@ -23,13 +24,13 @@ message CreateTable {
   int64 big_blind = 4;
   int64 min_buy_in = 5;
   int64 max_buy_in = 6;
-  int32 max_players = 7;         // 2-10
+  int32 max_players = 7; // 2-10
   int32 action_timeout_seconds = 8;
 }
 
 message JoinTable {
   bytes player_root = 1;
-  int32 preferred_seat = 2;      // -1 for any available
+  int32 preferred_seat = 2; // -1 for any available
   int64 buy_in_amount = 3;
 }
 
@@ -53,7 +54,7 @@ message EndHand {
 message PotResult {
   bytes winner_root = 1;
   int64 amount = 2;
-  string pot_type = 3;           // "main" or "side_N"
+  string pot_type = 3; // "main" or "side_N"
   HandRanking winning_hand = 4;
 }
 
@@ -80,7 +81,7 @@ message PlayerJoined {
   bytes player_root = 1;
   int32 seat_position = 2;
   int64 buy_in_amount = 3;
-  int64 stack = 4;               // Absolute stack after buy-in
+  int64 stack = 4; // Absolute stack after buy-in
   google.protobuf.Timestamp joined_at = 5;
 }
 
@@ -102,7 +103,7 @@ message PlayerSatIn {
 }
 
 message HandStarted {
-  bytes hand_root = 1;           // New hand aggregate root
+  bytes hand_root = 1; // New hand aggregate root
   int64 hand_number = 2;
   int32 dealer_position = 3;
   int32 small_blind_position = 4;
@@ -123,14 +124,14 @@ message SeatSnapshot {
 message HandEnded {
   bytes hand_root = 1;
   repeated PotResult results = 2;
-  map<string, int64> stack_changes = 3;  // player_root_hex -> delta
+  map<string, int64> stack_changes = 3; // player_root_hex -> delta
   google.protobuf.Timestamp ended_at = 4;
 }
 
 message ChipsAdded {
   bytes player_root = 1;
   int64 amount = 2;
-  int64 new_stack = 3;           // Absolute stack after add
+  int64 new_stack = 3; // Absolute stack after add
   google.protobuf.Timestamp added_at = 4;
 }
 
@@ -149,5 +150,5 @@ message TableState {
   int32 dealer_position = 11;
   int64 hand_count = 12;
   bytes current_hand_root = 13;
-  string status = 14;            // "waiting", "in_hand", "paused"
+  string status = 14; // "waiting", "in_hand", "paused"
 }

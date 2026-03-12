@@ -1,13 +1,14 @@
 syntax = "proto3";
 package examples;
-option go_package = "github.com/angzarr/angzarr/proto/examples";
-option java_package = "dev.angzarr.examples";
-option java_multiple_files = true;
-option csharp_namespace = "Angzarr.Examples";
-option ruby_package = "Angzarr::Examples";
 
-import "google/protobuf/timestamp.proto";
 import "examples/poker_types.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Angzarr.Examples";
+option go_package = "github.com/angzarr/angzarr/proto/examples";
+option java_multiple_files = true;
+option java_package = "dev.angzarr.examples";
+option ruby_package = "Angzarr::Examples";
 
 // =============================================================================
 // Hand Domain - Single hand of poker with polymorphic game rules
@@ -24,7 +25,7 @@ message DealCards {
   int32 dealer_position = 5;
   int64 small_blind = 6;
   int64 big_blind = 7;
-  bytes deck_seed = 8;           // For deterministic shuffle (testing)
+  bytes deck_seed = 8; // For deterministic shuffle (testing)
 }
 
 message PlayerInHand {
@@ -35,28 +36,28 @@ message PlayerInHand {
 
 message PostBlind {
   bytes player_root = 1;
-  string blind_type = 2;         // "small", "big", "ante"
+  string blind_type = 2; // "small", "big", "ante"
   int64 amount = 3;
 }
 
 message PlayerAction {
   bytes player_root = 1;
   ActionType action = 2;
-  int64 amount = 3;              // For bet/raise/call
+  int64 amount = 3; // For bet/raise/call
 }
 
 message DealCommunityCards {
-  int32 count = 1;               // 3 for flop, 1 for turn/river
+  int32 count = 1; // 3 for flop, 1 for turn/river
 }
 
 message RequestDraw {
   bytes player_root = 1;
-  repeated int32 card_indices = 2;  // Which cards to discard (0-indexed)
+  repeated int32 card_indices = 2; // Which cards to discard (0-indexed)
 }
 
 message RevealCards {
   bytes player_root = 1;
-  bool muck = 2;                 // True to hide cards (fold at showdown)
+  bool muck = 2; // True to hide cards (fold at showdown)
 }
 
 message AwardPot {
@@ -79,7 +80,7 @@ message CardsDealt {
   int32 dealer_position = 5;
   repeated PlayerInHand players = 6;
   google.protobuf.Timestamp dealt_at = 7;
-  repeated Card remaining_deck = 8;  // Cards left after dealing hole cards
+  repeated Card remaining_deck = 8; // Cards left after dealing hole cards
 }
 
 message PlayerHoleCards {
@@ -91,8 +92,8 @@ message BlindPosted {
   bytes player_root = 1;
   string blind_type = 2;
   int64 amount = 3;
-  int64 player_stack = 4;        // Absolute stack after posting
-  int64 pot_total = 5;           // Absolute pot after posting
+  int64 player_stack = 4; // Absolute stack after posting
+  int64 pot_total = 5; // Absolute pot after posting
   google.protobuf.Timestamp posted_at = 6;
 }
 
@@ -100,9 +101,9 @@ message ActionTaken {
   bytes player_root = 1;
   ActionType action = 2;
   int64 amount = 3;
-  int64 player_stack = 4;        // Absolute stack after action
-  int64 pot_total = 5;           // Absolute pot after action
-  int64 amount_to_call = 6;      // Current call amount for next player
+  int64 player_stack = 4; // Absolute stack after action
+  int64 pot_total = 5; // Absolute pot after action
+  int64 amount_to_call = 6; // Current call amount for next player
   google.protobuf.Timestamp action_at = 7;
 }
 
@@ -122,8 +123,8 @@ message PlayerStackSnapshot {
 
 message CommunityCardsDealt {
   repeated Card cards = 1;
-  BettingPhase phase = 2;        // FLOP, TURN, or RIVER
-  repeated Card all_community_cards = 3;  // Full board so far
+  BettingPhase phase = 2; // FLOP, TURN, or RIVER
+  repeated Card all_community_cards = 3; // Full board so far
   google.protobuf.Timestamp dealt_at = 4;
 }
 
@@ -131,7 +132,7 @@ message DrawCompleted {
   bytes player_root = 1;
   int32 cards_discarded = 2;
   int32 cards_drawn = 3;
-  repeated Card new_cards = 4;   // Only visible to this player
+  repeated Card new_cards = 4; // Only visible to this player
   google.protobuf.Timestamp drawn_at = 5;
 }
 
@@ -148,7 +149,7 @@ message CardsMucked {
 }
 
 message ShowdownStarted {
-  repeated bytes players_to_show = 1;  // Order of revelation
+  repeated bytes players_to_show = 1; // Order of revelation
   google.protobuf.Timestamp started_at = 2;
 }
 
@@ -174,7 +175,7 @@ message HandComplete {
 
 message PlayerTimedOut {
   bytes player_root = 1;
-  ActionType default_action = 2;  // Usually FOLD or CHECK
+  ActionType default_action = 2; // Usually FOLD or CHECK
   google.protobuf.Timestamp timed_out_at = 3;
 }
 
@@ -206,7 +207,7 @@ message HandState {
   int32 small_blind_position = 14;
   int32 big_blind_position = 15;
 
-  string status = 16;  // "dealing", "betting", "showdown", "complete"
+  string status = 16; // "dealing", "betting", "showdown", "complete"
 }
 
 message PlayerHandState {
