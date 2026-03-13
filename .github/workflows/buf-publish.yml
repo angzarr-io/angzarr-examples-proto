@@ -74,4 +74,5 @@ jobs:
           BUF_TOKEN: ${{ secrets.BUF_TOKEN }}
         run: |
           cd proto
-          buf push --create --create-visibility public --label "${{ steps.version.outputs.version }}"
+          # Push with version label and main label for default access
+          buf push --create --create-visibility public --label "${{ steps.version.outputs.version }}" --label main
